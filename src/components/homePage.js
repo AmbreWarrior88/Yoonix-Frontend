@@ -1,9 +1,26 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "@material-ui/core/Link";
 
 import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
 
 import ConnexionModal from "../containers/modal";
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    background: "#39505D",
+    color: "white",
+    fontWeight: "bold",
+  },
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "100px",
+  },
+}));
 
 const HomePage = () => {
   const [open, setOpen] = useState(false);
@@ -14,14 +31,20 @@ const HomePage = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
+  const classes = useStyles();
   return (
-    <div>
-      <Button variant="contained" onClick={handleOpen}>
+    <div className={classes.root}>
+      <Button
+        className={classes.button}
+        variant="contained"
+        onClick={handleOpen}
+      >
         Connexion
       </Button>
-      <Link to="/registration">
-        <Button variant="contained">Inscription</Button>
+      <Link underline="none" href="/registration">
+        <Button className={classes.button} variant="contained">
+          Inscription
+        </Button>
       </Link>
 
       <ConnexionModal open={open} handleClose={handleClose} />

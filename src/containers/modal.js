@@ -1,12 +1,27 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  createMuiTheme,
+  ThemeProvider,
+} from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 
-import { Link } from "react-router-dom";
+import TextField from "@material-ui/core/TextField";
+
+import Link from "@material-ui/core/Link";
 
 import Button from "@material-ui/core/Button";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#FAD493",
+    },
+    type: "dark",
+  },
+});
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -15,10 +30,25 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
+    backgroundColor: "#121E23",
+    border: "4px solid #FAD493",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+  },
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+      width: "25ch",
+    },
+  },
+  button: {
+    marginTop: "40px",
+    background: "#39505D",
+    color: "white",
+    fontWeight: "bold",
+  },
+  title: {
+    color: "#FAD493",
   },
 }));
 
@@ -38,10 +68,15 @@ const ConnexionModal = (props) => {
     >
       <Fade in={props.open}>
         <div className={classes.paper}>
-          <h2 id="transition-modal-title">Connexion</h2>
-          <p id="transition-modal-description">ID et mdp</p>
-          <Link to="/privet">
-            <Button>Valider</Button>
+          <h2 className={classes.title}>Connexion</h2>
+          <form className={classes.root}>
+            <ThemeProvider theme={theme}>
+              <TextField label="Identifiant" />
+              <TextField label="Mot de passe" />
+            </ThemeProvider>
+          </form>
+          <Link underline="none" href="/privet">
+            <Button className={classes.button}>Valider</Button>
           </Link>
         </div>
       </Fade>

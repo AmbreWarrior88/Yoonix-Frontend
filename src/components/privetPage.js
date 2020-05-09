@@ -3,7 +3,7 @@ import React from "react";
 const PrivetPage = () => {
   return (
     <div>
-      <p>Page privée</p>
+      <h2 style={{ color: "#FAD493" }}>Membre inscrit</h2>
     </div>
   );
 };
