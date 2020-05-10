@@ -1,4 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+import Axios from "axios";
+
+import { useHistory } from "react-router-dom";
+
 import {
   makeStyles,
   createMuiTheme,
@@ -9,8 +13,6 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 
 import TextField from "@material-ui/core/TextField";
-
-import Link from "@material-ui/core/Link";
 
 import Button from "@material-ui/core/Button";
 
@@ -55,6 +57,11 @@ const useStyles = makeStyles((theme) => ({
 const ConnexionModal = (props) => {
   const classes = useStyles();
 
+  const history = useHistory();
+
+  const [lastName, setLastName] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <Modal
       className={classes.modal}
@@ -69,15 +76,46 @@ const ConnexionModal = (props) => {
       <Fade in={props.open}>
         <div className={classes.paper}>
           <h2 className={classes.title}>Connexion</h2>
-          <form className={classes.root}>
+          <form
+            className={classes.root}
+            onSubmit={async (event) => {
+              event.preventDefault();
+              try {
+                const response = await Axios.post(
+                  "http://localhost:4000/user",
+                  { lastname: lastName, password: password }
+                );
+                console.log(response.data);
+
+                history.push("/privet");
+              } catch (error) {
+                alert("Mauvais nom ou mot de passe");
+              }
+            }}
+          >
             <ThemeProvider theme={theme}>
-              <TextField label="Identifiant" />
-              <TextField label="Mot de passe" />
+              <TextField
+                label="Identifiant"
+                type="text"
+                value={lastName}
+                onChange={(event) => {
+                  setLastName(event.target.value);
+                }}
+              />
+              <TextField
+                label="Mot de passe"
+                type="password"
+                value={password}
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
+              />
             </ThemeProvider>
+
+            <Button className={classes.button} type="submit">
+              Valider
+            </Button>
           </form>
-          <Link underline="none" href="/privet">
-            <Button className={classes.button}>Valider</Button>
-          </Link>
         </div>
       </Fade>
     </Modal>

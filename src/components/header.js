@@ -6,7 +6,7 @@ const useStyles = makeStyles({
   root: {
     color: "#FAD493",
     paddingLeft: "20px",
-    paddingTop: "10px",
+    paddingBottom: "10px",
 
     borderBottom: "1px solid #FAD493",
   },
@@ -15,11 +15,9 @@ const useStyles = makeStyles({
 const Header = () => {
   const classes = useStyles();
   return (
-    <header>
-      <Link underline="none" href="/">
-        <h1 className={classes.root}>Hello World</h1>
-      </Link>
-    </header>
+    <Link underline="none" href="/">
+      <h1 className={classes.root}>Hello World</h1>
+    </Link>
   );
 };
 
