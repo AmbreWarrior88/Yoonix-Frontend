@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Axios from "axios";
+import axios from "axios";
 
 import { useHistory } from "react-router-dom";
 
@@ -72,7 +72,7 @@ const RegistrationPage = () => {
         onSubmit={async (event) => {
           event.preventDefault();
           try {
-            const response = await Axios.post(
+            const response = await axios.post(
               "http://localhost/4000/user/create",
               {
                 lastname: lastName,
@@ -81,10 +81,20 @@ const RegistrationPage = () => {
                 password: password,
               }
             );
-
-            history.push("/privet");
+            if (
+              lastName !== "" &&
+              firstName !== "" &&
+              email !== "" &&
+              password !== "" &&
+              passwordConfirm !== "" &&
+              password === passwordConfirm
+            ) {
+              history.push("/privet");
+            } else {
+              alert("Tous les champs ne sont pas remplis");
+            }
           } catch (error) {
-            alert("Tous les champs ne sont pas remplis");
+            alert("Une erreur s'est produite");
           }
         }}
       >

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Axios from "axios";
+import axios from "axios";
 
 import { useHistory } from "react-router-dom";
 
@@ -81,7 +81,7 @@ const ConnexionModal = (props) => {
             onSubmit={async (event) => {
               event.preventDefault();
               try {
-                const response = await Axios.post(
+                const response = await axios.post(
                   "http://localhost:4000/user",
                   { lastname: lastName, password: password }
                 );
@@ -111,7 +111,7 @@ const ConnexionModal = (props) => {
                 }}
               />
             </ThemeProvider>
-
+            <br />
             <Button className={classes.button} type="submit">
               Valider
             </Button>
