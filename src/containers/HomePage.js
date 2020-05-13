@@ -21,32 +21,50 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HomePage = () => {
+const HomePage = (props) => {
+  // State pour gérer ouverture/fermeture Modal
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
-  const classes = useStyles();
-  return (
-    <div className={classes.root}>
-      <Button
-        className={classes.button}
-        variant="contained"
-        onClick={handleOpen}
-      >
-        Connexion
-      </Button>
-      <Link underline="none" href="/registration">
-        <Button className={classes.button} variant="contained">
-          Inscription
-        </Button>
-      </Link>
 
-      <ConnexionModal open={open} handleClose={handleClose} />
+  const classes = useStyles();
+
+  return (
+    <div>
+      <h2
+        style={{
+          color: "#FAD493",
+          display: "flex",
+          justifyContent: "center",
+          margin: "100px",
+        }}
+      >
+        Bienvenue !
+      </h2>
+      <div className={classes.root}>
+        <Button
+          className={classes.button}
+          variant="contained"
+          onClick={handleOpen}
+        >
+          Connexion
+        </Button>
+        <Link underline="none" href="/registration">
+          <Button className={classes.button} variant="contained">
+            Créer un compte
+          </Button>
+        </Link>
+
+        <ConnexionModal
+          open={open}
+          handleClose={handleClose}
+          setToken={props.setToken}
+        />
+      </div>
     </div>
   );
 };

@@ -53,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     color: "#FAD493",
+    paddingLeft: "10px",
   },
 }));
 
@@ -61,8 +62,8 @@ const ConnexionModal = (props) => {
 
   const history = useHistory();
 
-  const [email, setEmail] = useState("marty@g.com");
-  const [password, setPassword] = useState("BackToTheFutur");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <Modal
@@ -88,7 +89,10 @@ const ConnexionModal = (props) => {
                   { email, password }
                 );
                 if (!response.error) {
+                  // Stocker le token dans les cookies
                   Cookies.set("token", response.data.token);
+                  // Met à jour le state token dans app.js
+                  props.setToken(response.data);
                   history.push("/private");
                 }
               } catch (error) {
@@ -97,6 +101,7 @@ const ConnexionModal = (props) => {
             }}
           >
             <ThemeProvider theme={theme}>
+              {/* ---------Input Email-------- */}
               <TextField
                 label="Email"
                 type="email"
@@ -105,6 +110,7 @@ const ConnexionModal = (props) => {
                   setEmail(event.target.value);
                 }}
               />
+              {/* ---------Input Password--------- */}
               <TextField
                 label="Mot de passe"
                 type="password"
@@ -115,7 +121,12 @@ const ConnexionModal = (props) => {
               />
             </ThemeProvider>
             <br />
-            <Button className={classes.button} type="submit">
+            {/* ---------Valide le formulaire-------- */}
+            <Button
+              className={classes.button}
+              variant="contained"
+              type="submit"
+            >
               Valider
             </Button>
           </form>

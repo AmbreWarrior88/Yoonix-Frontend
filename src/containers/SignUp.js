@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+import Cookie from "js-cookie";
 import { useHistory } from "react-router-dom";
 
 import {
@@ -41,18 +42,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RegistrationPage = () => {
+const RegistrationPage = (props) => {
   const classes = useStyles();
 
   const history = useHistory();
 
-  const [lastName, setLastName] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-
-  const [notSamePassword, setNotSamePassword] = useState(false);
+  const [lastName, setLastName] = useState("a");
+  const [firstName, setFirstName] = useState("a");
+  const [email, setEmail] = useState("a@g.com");
+  const [password, setPassword] = useState("a");
+  const [passwordConfirm, setPasswordConfirm] = useState("a");
 
   return (
     <div style={{ margin: "50px" }}>
@@ -72,15 +71,6 @@ const RegistrationPage = () => {
         onSubmit={async (event) => {
           event.preventDefault();
           try {
-            const response = await axios.post(
-              "http://localhost:4000/user/sign_up",
-              {
-                lastname: lastName,
-                firstname: firstName,
-                email: email,
-                password: password,
-              }
-            );
             if (
               lastName !== "" &&
               firstName !== "" &&
@@ -89,6 +79,20 @@ const RegistrationPage = () => {
               passwordConfirm !== "" &&
               password === passwordConfirm
             ) {
+              const response = await axios.post(
+                "http://localhost:4000/user/sign_up",
+                {
+                  lastname: lastName,
+                  firstname: firstName,
+                  email: email,
+                  password: password,
+                }
+              );
+              console.log(response.data);
+              // Stocker le token dans les cookies
+              Cookie.set("token", response.data.token);
+              // Met à jour la statue du state token
+              props.setToken(response.data);
               history.push("/private");
             } else {
               alert("Tous les champs ne sont pas remplis");
@@ -99,6 +103,7 @@ const RegistrationPage = () => {
         }}
       >
         <ThemeProvider theme={theme}>
+          {/* ------Input Nom------ */}
           <TextField
             label="Nom"
             type="text"
@@ -107,6 +112,7 @@ const RegistrationPage = () => {
               setLastName(event.target.value);
             }}
           />
+          {/* -------Input Prénom------- */}
           <TextField
             label="Prénom"
             type="text"
@@ -115,6 +121,7 @@ const RegistrationPage = () => {
               setFirstName(event.target.value);
             }}
           />
+          {/* --------Input Email-------- */}
           <TextField
             label="Email"
             type="email"
@@ -123,6 +130,7 @@ const RegistrationPage = () => {
               setEmail(event.target.value);
             }}
           />
+          {/* ---------Input Password-------- */}
           <TextField
             label="Mot de passe"
             type="password"
@@ -131,16 +139,30 @@ const RegistrationPage = () => {
               setPassword(event.target.value);
             }}
           />
-          <TextField
-            label="Confirmation du mot de passe"
-            type="password"
-            value={passwordConfirm}
-            onChange={(event) => {
-              setPasswordConfirm(event.target.value);
-            }}
-          />
+          {/* --------Input Confirmation Password--------- */}
+          {password !== passwordConfirm ? (
+            <TextField
+              error
+              helperText="Mot de passe différent"
+              label="Confirmation du mot de passe"
+              type="password"
+              value={passwordConfirm}
+              onChange={(event) => {
+                setPasswordConfirm(event.target.value);
+              }}
+            />
+          ) : (
+            <TextField
+              label="Confirmation du mot de passe"
+              type="password"
+              value={passwordConfirm}
+              onChange={(event) => {
+                setPasswordConfirm(event.target.value);
+              }}
+            />
+          )}
         </ThemeProvider>
-
+        {/* ------Validation du formulaire-------- */}
         <Button className={classes.button} variant="contained" type="submit">
           Valider
         </Button>
