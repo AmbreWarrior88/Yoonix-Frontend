@@ -73,7 +73,7 @@ const RegistrationPage = () => {
           event.preventDefault();
           try {
             const response = await axios.post(
-              "http://localhost/4000/user/create",
+              "http://localhost:4000/user/sign_up",
               {
                 lastname: lastName,
                 firstname: firstName,
@@ -89,7 +89,7 @@ const RegistrationPage = () => {
               passwordConfirm !== "" &&
               password === passwordConfirm
             ) {
-              history.push("/privet");
+              history.push("/private");
             } else {
               alert("Tous les champs ne sont pas remplis");
             }

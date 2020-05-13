@@ -10,14 +10,14 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomePage from "./containers/HomePage";
 import SignUp from "./containers/SignUp";
-import PrivetPage from "./containers/PrivetPage";
+import PrivatePage from "./containers/PrivatePage";
 
 function App() {
   return (
     <Container fixed>
       <Typography
         component="div"
-        style={{ backgroundColor: "#121E23", height: "100vh" }}
+        style={{ backgroundColor: "#121E23", minHeight: "100vh" }}
       >
         <Router>
           <Header />
@@ -28,8 +28,8 @@ function App() {
             <Route path="/registration">
               <SignUp />
             </Route>
-            <Route path="/privet">
-              <PrivetPage />
+            <Route path="/private">
+              <PrivatePage />
             </Route>
           </Switch>
         </Router>

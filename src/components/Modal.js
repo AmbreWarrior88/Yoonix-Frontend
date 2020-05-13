@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+import Cookies from "js-cookie";
+
 import { useHistory } from "react-router-dom";
 
 import {
@@ -59,8 +61,8 @@ const ConnexionModal = (props) => {
 
   const history = useHistory();
 
-  const [lastName, setLastName] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("marty@g.com");
+  const [password, setPassword] = useState("BackToTheFutur");
 
   return (
     <Modal
@@ -82,12 +84,13 @@ const ConnexionModal = (props) => {
               event.preventDefault();
               try {
                 const response = await axios.post(
-                  "http://localhost:4000/user",
-                  { lastname: lastName, password: password }
+                  "http://localhost:4000/user/sign_in",
+                  { email, password }
                 );
-                console.log(response.data);
-
-                history.push("/privet");
+                if (!response.error) {
+                  Cookies.set("token", response.data.token);
+                  history.push("/private");
+                }
               } catch (error) {
                 alert("Mauvais nom ou mot de passe");
               }
@@ -95,11 +98,11 @@ const ConnexionModal = (props) => {
           >
             <ThemeProvider theme={theme}>
               <TextField
-                label="Identifiant"
-                type="text"
-                value={lastName}
+                label="Email"
+                type="email"
+                value={email}
                 onChange={(event) => {
-                  setLastName(event.target.value);
+                  setEmail(event.target.value);
                 }}
               />
               <TextField
