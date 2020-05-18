@@ -47,11 +47,11 @@ const RegistrationPage = (props) => {
 
   const history = useHistory();
 
-  const [lastName, setLastName] = useState("a");
-  const [firstName, setFirstName] = useState("a");
-  const [email, setEmail] = useState("a@g.com");
-  const [password, setPassword] = useState("a");
-  const [passwordConfirm, setPasswordConfirm] = useState("a");
+  const [lastName, setLastName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
 
   return (
     <div style={{ margin: "50px" }}>
