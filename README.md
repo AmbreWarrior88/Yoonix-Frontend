@@ -1,22 +1,22 @@
-### Link
+## Link
 
-### Techno
+## Techno
 
-## Front
+### Front
 
 ReactJS fonctionnel (Hooks)
 React Router
 JS-cookie
 Material-UI
 
-## Back
+### Back
 
 NodeJS (framework express)
 Base donnée MongoDB
 Jsonwebtoken (JWT)
 RandomAPI (https://randomuser.me/)
 
-### Content
+## Content
 
 This webSite content 3 pages in Front and 3 routes in back :
 
@@ -24,7 +24,7 @@ This webSite content 3 pages in Front and 3 routes in back :
 - One page and route for SignIn
 - One page and private route (accessible only if the user is logged in)
 
-### Preview
+## Preview
 
 ![Capture d’écran 2020-11-03 à 16 45 28](https://user-images.githubusercontent.com/56254199/98008275-a573fd80-1df4-11eb-819e-5a1f7746ede9.png)
 
