@@ -4,16 +4,16 @@
 
 ### Front
 
-ReactJS fonctionnel (Hooks)
-React Router
-JS-cookie
+ReactJS fonctionnel (Hooks)<br/>
+React Router<br/>
+JS-cookie<br/>
 Material-UI
 
 ### Back
 
-NodeJS (framework express)
-Base donnée MongoDB
-Jsonwebtoken (JWT)
+NodeJS (framework express)<br/>
+Base donnée MongoDB<br/>
+Jsonwebtoken (JWT)<br/>
 RandomAPI (https://randomuser.me/)
 
 ## Content
