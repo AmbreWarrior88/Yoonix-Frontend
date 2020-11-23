@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Link from "@material-ui/core/Link";
 
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 
 import ConnexionModal from "../components/Modal";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -31,6 +31,8 @@ const HomePage = (props) => {
     setOpen(false);
   };
 
+  const history=useHistory()
+
   const classes = useStyles();
 
   return (
@@ -53,11 +55,11 @@ const HomePage = (props) => {
         >
           Connexion
         </Button>
-        <Link underline="none" href="/registration">
-          <Button className={classes.button} variant="contained">
+        
+          <Button className={classes.button} variant="contained" onClick={()=> history.push("/registration")}>
             Créer un compte
           </Button>
-        </Link>
+        
 
         <ConnexionModal
           open={open}
