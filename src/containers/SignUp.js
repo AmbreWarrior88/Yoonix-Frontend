@@ -80,7 +80,7 @@ const RegistrationPage = (props) => {
               password === passwordConfirm
             ) {
               const response = await axios.post(
-                "http://localhost:4000/user/sign_up",
+                "https://yoonix.herokuapp.com/user/sign_up",
                 {
                   lastname: lastName,
                   firstname: firstName,

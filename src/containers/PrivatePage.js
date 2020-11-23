@@ -35,7 +35,7 @@ const PrivatePage = () => {
     const fetchData = async () => {
       const response = await axios({
         method: "get",
-        url: "http://localhost:4000/private",
+        url: "https://yoonix.herokuapp.com/private",
         headers: { Authorization: "Bearer " + Cookies.get("token") },
       });
       console.log(response);

@@ -85,7 +85,7 @@ const ConnexionModal = (props) => {
               event.preventDefault();
               try {
                 const response = await axios.post(
-                  "http://localhost:4000/user/sign_in",
+                  "https://yoonix.herokuapp.com/user/sign_in",
                   { email, password }
                 );
                 if (!response.error) {
