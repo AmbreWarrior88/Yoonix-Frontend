@@ -8,6 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import MemberCard from "../components/MemberCard";
 
+
 const useStyles = makeStyles({
   title: {
     color: "#FAD493",
@@ -35,16 +36,14 @@ const PrivatePage = () => {
     const fetchData = async () => {
       const response = await axios({
         method: "get",
-        url: "https://yoonix.herokuapp.com/private",
+        url: `${process.env.REACT_APP_NODE_ENV === "dev" ? "http://localhost:4000" : "https://yoonix.herokuapp.com"}/private`,
         headers: { Authorization: "Bearer " + Cookies.get("token") },
       });
-      console.log(response);
-      if (response.status !== 401) {
-        setResults(response.data);
-      } else {
-        setResults([]);
-      }
+      console.log({response});
+      if (response.status === 200 && !response.data.message) {
+      setResults(response.data);
       setIsLoading(false);
+      }
     };
     fetchData();
   }, []);

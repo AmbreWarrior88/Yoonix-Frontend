@@ -85,9 +85,10 @@ const ConnexionModal = (props) => {
               event.preventDefault();
               try {
                 const response = await axios.post(
-                  "https://yoonix.herokuapp.com/user/sign_in",
+                  `${process.env.REACT_APP_NODE_ENV === "dev" ? "http://localhost:4000" : "https://yoonix.herokuapp.com"}/user/sign_in`,
                   { email, password }
                 );
+                console.log(response);
                 if (!response.error) {
                   // Stocker le token dans les cookies
                   Cookies.set("token", response.data.token);
