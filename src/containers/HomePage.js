@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import ConnexionModal from "../components/Modal";
 
-import Link from "@material-ui/core/Link";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -54,11 +54,11 @@ const HomePage = (props) => {
         >
           Connexion
         </Button>
-        <Link underline="none" href="/registration">
-            <Button className={classes.button} variant="contained">
+        
+            <Button component={Link} to={"/registration"} className={classes.button} variant="contained">
             Créer un compte
           </Button>
-        </Link>
+        
         <ConnexionModal
           open={open}
           handleClose={handleClose}
